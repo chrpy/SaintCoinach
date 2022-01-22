@@ -67,7 +67,12 @@ namespace SaintCoinach.Cmd {
                             useRow = ((IXivRow)row).SourceRow;
 
                         var insert = new Dictionary<string, object>();
-                            
+
+                        string itemKey = row.Key.ToString();
+                        if (sheet.Header.Variant != 1)
+                            itemKey = ((Ex.Variant2.SubRow)row).FullKey;
+                        SetJsonKey(insert, "Key", itemKey);
+
                         foreach (KeyValuePair<int, string> item in cols) {
                             int index = item.Key;
                             string key = item.Value;
@@ -79,9 +84,6 @@ namespace SaintCoinach.Cmd {
                             SetJsonKey(insert, key, v.ToString());
                         }
 
-                        string itemKey = row.Key.ToString();
-                        if (sheet.Header.Variant != 1)
-                            itemKey = ((Ex.Variant2.SubRow)row).FullKey;
                         items.Add(itemKey, insert);
                     }
                 }
