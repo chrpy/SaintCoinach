@@ -42,7 +42,7 @@ namespace SaintCoinach.Cmd {
                 var data = new Dictionary<string, object>();
 
                 var cols = new Dictionary<int, string>();
-                var items = new List<object>();
+                var items = new Dictionary<string, object>();
 
                 foreach (var col in sheet.Header.Columns) {
                     string key = "";
@@ -50,8 +50,6 @@ namespace SaintCoinach.Cmd {
                         key = col.Name.Replace("{", ".").Replace("[", ".").Replace("}", "").Replace("]", "");
                     cols.Add(col.Index, key);
                 }
-
-                int _i = 0;
 
                 var rows = new List<IEnumerable<Ex.IRow>>();
                 if (sheet.Header.Variant == 1) {
@@ -81,7 +79,10 @@ namespace SaintCoinach.Cmd {
                             SetJsonKey(insert, key, v.ToString());
                         }
 
-                        items.Add(insert);
+                        string itemKey = row.Key.ToString();
+                        if (sheet.Header.Variant != 1)
+                            itemKey = ((Ex.Variant2.SubRow)row).FullKey;
+                        items.Add(itemKey, insert);
                     }
                 }
 
