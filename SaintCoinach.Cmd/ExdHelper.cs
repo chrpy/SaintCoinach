@@ -88,9 +88,10 @@ namespace SaintCoinach.Cmd {
                     }
                 }
 
-                s.WriteLine(JsonConvert.SerializeObject(items, Formatting.Indented));
+                s.WriteLine(JsonConvert.SerializeObject(items, cols.Count<=100? Formatting.Indented : Formatting.None));
             }
         }
+
         public static void SetJsonKey(Dictionary<string, object> dict, string path, string val) {
             var keys = path.Split('.');
             var toSet = dict;
