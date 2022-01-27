@@ -65,6 +65,7 @@ namespace SaintCoinach.Cmd {
                         var useRow = row;
                         if (useRow is IXivRow)
                             useRow = ((IXivRow)row).SourceRow;
+                        var multiRow = useRow as IMultiRow;
 
                         var insert = new Dictionary<string, object>();
 
@@ -77,8 +78,15 @@ namespace SaintCoinach.Cmd {
                             int index = item.Key;
                             string key = item.Value;
                             if (key == "")
-                                continue;
-                            object v = useRow[index]; // TODO: Multirow
+                                key = "col_" + index;
+
+                            object v;
+
+                            if (language == Language.None || multiRow == null)
+                                v = writeRaw ? useRow.GetRaw(index) : useRow[index];
+                            else
+                                v = writeRaw ? multiRow.GetRaw(index, language) : multiRow[index, language];
+
                             if (v == null)
                                 continue;
                             SetJsonKey(insert, key, v.ToString());

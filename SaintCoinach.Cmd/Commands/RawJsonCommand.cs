@@ -12,16 +12,16 @@ using Tharga.Toolkit.Console.Command.Base;
 #pragma warning disable CS1998
 
 namespace SaintCoinach.Cmd.Commands {
-    public class JsonCommand : ActionCommandBase {
+    public class RawJsonCommand : ActionCommandBase {
         private ARealmReversed _Realm;
 
-        public JsonCommand(ARealmReversed realm)
-            : base("json", "Export all data (default), or only specific data files seperated by spaces, as JSON files.") {
+        public RawJsonCommand(ARealmReversed realm)
+            : base("rawjson", "Export all data (default), or only specific data files seperated by spaces, as JSON files.") {
             _Realm = realm;
         }
 
         public override async Task<bool> InvokeAsync(string paramList) {
-            const string JsonFileFormat = "json/{0}.json";
+            const string JsonFileFormat = "rawjson/{0}.json";
 
             IEnumerable<string> filesToExport;
 
@@ -39,8 +39,8 @@ namespace SaintCoinach.Cmd.Commands {
 
                     if (!target.Directory.Exists)
                         target.Directory.Create();
-
-                    ExdHelper.SaveAsJson(sheet, Ex.Language.None, target.FullName, false);
+                    
+                    ExdHelper.SaveAsJson(sheet, Ex.Language.None, target.FullName, true);
 
                     ++successCount;
                 }
