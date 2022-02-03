@@ -20,7 +20,7 @@ namespace SaintCoinach.Cmd.Commands {
         private ARealmReversed _Realm;
 
         public AllJsonCommand(ARealmReversed realm)
-            : base("alljson", "Export all data (default), or only specific data files, as json; including all languages.") {
+            : base("alljson", "Export all data (default), or only specific data files, as JSON-files; including all languages.") {
             _Realm = realm;
         }
 

@@ -22,7 +22,7 @@ namespace SaintCoinach.Cmd.Commands
         /// </summary>
         /// <param name="realm"></param>
         public AllJsonRawCommand(ARealmReversed realm)
-            : base("allrawjson", "Export all data (default), or only specific data files, seperated by spaces; including all languages. No post-processing is applied to values.")
+            : base("allrawjson", "Export all data (default), or only specific data files, as JSON-files; including all languages. No post-processing is applied to values.")
         {
             _Realm = realm;
         }

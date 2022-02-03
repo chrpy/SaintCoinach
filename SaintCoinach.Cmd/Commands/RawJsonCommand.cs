@@ -16,7 +16,7 @@ namespace SaintCoinach.Cmd.Commands {
         private ARealmReversed _Realm;
 
         public RawJsonCommand(ARealmReversed realm)
-            : base("rawjson", "Export all data (default), or only specific data files seperated by spaces, as JSON files.") {
+            : base("rawjson", "Export all data (default), or only specific data files seperated by spaces, as JSON-files.") {
             _Realm = realm;
         }
 
