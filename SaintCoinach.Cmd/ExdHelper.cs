@@ -73,7 +73,7 @@ namespace SaintCoinach.Cmd {
                             itemKey = ((Ex.Variant2.SubRow)row).FullKey;
                         SetJsonKey(insert, "Key", itemKey);
 
-                        foreach (KeyValuePair<int, string> item in cols) {
+                        foreach (KeyValuePair<int, string> item in cols.OrderBy(_ => _.Value)) {
                             int index = item.Key;
                             string key = item.Value;
                             if (key == "")
