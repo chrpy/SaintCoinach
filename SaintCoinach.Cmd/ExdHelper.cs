@@ -77,7 +77,7 @@ namespace SaintCoinach.Cmd {
                             int index = item.Key;
                             string key = item.Value;
                             if (key == "")
-                                continue;
+                                key = index.ToString();
                             var v = useRow[index]; // TODO: Multirow
                             if (v == null)
                                 continue;
