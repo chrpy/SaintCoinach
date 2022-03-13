@@ -78,10 +78,22 @@ namespace SaintCoinach.Cmd {
                             string key = item.Value;
                             if (key == "")
                                 continue;
-                            object v = useRow[index]; // TODO: Multirow
+                            var v = useRow[index]; // TODO: Multirow
                             if (v == null)
                                 continue;
-                            SetJsonKey(insert, key, v.ToString());
+
+                            string value = "";
+                            if (v is XivRow) {
+                                XivRow rowVal = ((XivRow)v);
+                                string toStr = rowVal.ToString();
+                                if (rowVal.Sheet.Header.ColumnCount > 2 && rowVal.Sheet.Header.FindColumn("Name") != null)
+                                    value = rowVal.Sheet.Name + "#" + rowVal.Key;
+                                else
+                                    value = toStr;
+                            } else {
+                                value = v.ToString();
+                            }
+                            SetJsonKey(insert, key, value);
                         }
 
                         items.Add(itemKey, insert);
